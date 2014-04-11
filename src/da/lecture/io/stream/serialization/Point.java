@@ -13,8 +13,10 @@ public class Point implements Serializable
     /** Y-Koordinate. */
     private int y;
 
+    private Point ref;
+
     /**
-     * Initialisiert eine neue {@link Point}-Instanz mit den übergebenen
+     * Initialisiert eine neue {@link Point}-Instanz mit den ��bergebenen
      * Argumenten.
      * 
      * @param x
@@ -28,8 +30,18 @@ public class Point implements Serializable
         this.y = y;
     }
 
+    public void setRef(Point point)
+    {
+        this.ref = point;
+    }
+
+    public Point getRef()
+    {
+        return this.ref;
+    }
+
     /**
-     * Liefert die X-Koordinate des Punktes zurück.
+     * Liefert die X-Koordinate des Punktes zur��ck.
      * 
      * @return X-Koordinate.
      */
@@ -50,7 +62,7 @@ public class Point implements Serializable
     }
 
     /**
-     * Liefert die Y-Koordinate des Punktes zurück.
+     * Liefert die Y-Koordinate des Punktes zur��ck.
      * 
      * @return Y-Koordinate.
      */
