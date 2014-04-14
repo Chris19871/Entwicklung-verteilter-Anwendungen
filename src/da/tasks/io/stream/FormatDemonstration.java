@@ -12,5 +12,6 @@ public class FormatDemonstration
 
         // Kann beliebig viele Parameter bekommen, wie in C++.
         ps.format("Das ist ein %s Test %d", s, 1);
+        ps.close();
     }
 }
