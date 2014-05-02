@@ -11,9 +11,10 @@ public class Point implements Serializable
     /** X-Koordinate. */
     private int x;
     /** Y-Koordinate. */
-    private int y;
+    protected int y;
 
     private Point ref;
+    private long serialVersionUID;
 
     /**
      * Initialisiert eine neue {@link Point}-Instanz mit den ��bergebenen

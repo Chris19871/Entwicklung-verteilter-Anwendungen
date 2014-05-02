@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class FileCopyMeasuring
 {
@@ -27,6 +28,11 @@ public class FileCopyMeasuring
         copyFileInputStreamModified("testfile");
         estimatedTime = System.nanoTime() - startTime;
         System.out.println("copyFileBuffMod: " + estimatedTime);
+
+        startTime = System.nanoTime();
+        copyFileFileChannel("testfile");
+        estimatedTime = System.nanoTime() - startTime;
+        System.out.println("copyFileFileChannel: " + estimatedTime);
     }
 
     public static void copyFileInputStream(String file) throws FileNotFoundException, IOException
@@ -63,6 +69,17 @@ public class FileCopyMeasuring
             {
                 os.write(buffer, 0, len);
             }
+        }
+    }
+
+    public static void copyFileFileChannel(String file) throws IOException
+    {
+        try (final FileInputStream is = new FileInputStream(file); final FileOutputStream os = new FileOutputStream(COPIED_FILE_NAME))
+        {
+            FileChannel sourceFileChannel = is.getChannel();
+            FileChannel destinationFileChannel = os.getChannel();
+            long size = sourceFileChannel.size();
+            sourceFileChannel.transferTo(0, size, destinationFileChannel);
         }
     }
 }

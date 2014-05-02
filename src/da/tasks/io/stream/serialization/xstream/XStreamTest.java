@@ -16,8 +16,8 @@ public class XStreamTest
     {
         XStream xstream = new XStream(new DomDriver());
 
-        xstream.alias("person", Person.class);
-        xstream.alias("phonenumber", PhoneNumber.class);
+        xstream.alias("personTEst", Person.class);
+        xstream.alias("phonenumberTEST", PhoneNumber.class);
 
         Person joe = new Person("Joe", "Walnes");
         joe.setPhone(new PhoneNumber(123, "1234-456", new SomeData(66)));

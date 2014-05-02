@@ -15,7 +15,7 @@ public class ObjectCopy
         Point point = new Point(10, 20);
 
         Point pointCopy = (Point) ObjectCopy.deepCopy(point);
-        pointCopy.getX();
+        System.out.println(pointCopy.getX());
     }
 
     /**
@@ -28,6 +28,8 @@ public class ObjectCopy
      */
     public static Object deepCopy(Object o) throws Exception
     {
+        // Statt den beiden Klassen FileInputStream und FileOutputStream
+        // werden ByteArrayInputStream und ByteArrayOutputStream benutzt.
         ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
         ObjectOutputStream objectOut = new ObjectOutputStream(byteOut);
         objectOut.writeObject(o);

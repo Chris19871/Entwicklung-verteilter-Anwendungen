@@ -3,12 +3,12 @@ package da.tasks.io.stream.serialization;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.charset.Charset;
 
 import da.lecture.io.stream.serialization.Point;
@@ -16,7 +16,7 @@ import da.lecture.io.stream.serialization.Point;
 public class ObjectOutputStreamExamination
 {
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, ClassNotFoundException
     {
         Point point = new Point(10, 20);
         ObjectOutputStreamExamination.writePoint(point);
@@ -38,10 +38,9 @@ public class ObjectOutputStreamExamination
      */
     private static void writePoint(final Point p) throws IOException
     {
-        try (final DataOutputStream dOut = new DataOutputStream(new BufferedOutputStream(new FileOutputStream("out.serial"))))
+        try (final ObjectOutputStream dOut = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("out.serial"))))
         {
-            dOut.writeInt(p.getX());
-            dOut.writeInt(p.getY());
+            dOut.writeObject(p);
         }
     }
 
@@ -49,8 +48,15 @@ public class ObjectOutputStreamExamination
     {
         // Irgendwas stimmt nicht, Ausgabe bleibt leer???
         final BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream("out.serial"), Charset.forName("UTF-8")));
-        final String answer = reader.readLine();
-        System.out.println(answer);
+
+        String temp = null;
+        StringBuffer text = new StringBuffer();
+        while ((temp = reader.readLine()) != null)
+        {
+            text.append(temp + "\n");
+        }
+
+        System.out.println(text.toString());
     }
 
     /**
@@ -61,15 +67,13 @@ public class ObjectOutputStreamExamination
      * @throws IOException
      *             Wird ausgelöst, wenn es beim Deserialisieren zu einem
      *             Ein-/Ausgabefehler gekommen ist.
+     * @throws ClassNotFoundException
      */
-    private static Point readPoint() throws IOException
+    private static Point readPoint() throws IOException, ClassNotFoundException
     {
-        try (final DataInputStream dIn = new DataInputStream(new BufferedInputStream(new FileInputStream("out.serial"))))
+        try (final ObjectInputStream dIn = new ObjectInputStream(new BufferedInputStream(new FileInputStream("out.serial"))))
         {
-            final int x = dIn.readInt();
-            final int y = dIn.readInt();
-
-            return new Point(x, y);
+            return (Point) dIn.readObject();
         }
     }
 }

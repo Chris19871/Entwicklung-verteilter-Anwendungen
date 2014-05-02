@@ -9,6 +9,11 @@ import java.io.Serializable;
 public class ListEntry implements Serializable
 {
     /** Referenz auf das nächste Listenelement der einfachverketteten Liste. */
+    /*
+     * Ohne transient "Exception in thread "main" java.lang.StackOverflowError"
+     * Mit transient gekennzeichnete Variablen werden bei Serialisierungen zur
+     * persistenten Abspeicherung eines Objekts nicht mit gespeichert.
+     */
     private transient ListEntry next = null;
     /** Wert dieses Listenelementes. */
     private String value;

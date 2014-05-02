@@ -23,7 +23,8 @@ public class RepeatedSerialization
         try (final ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("out.serial"))))
         {
             out.writeObject(a);
-            out.writeObject(b);
+            out.writeObject(b); // Hier wird nur die Referenz auf das erste
+                                // serialisierte Objekt geschrieben (in a)
         }
 
         try (final ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("out.serial"))))
