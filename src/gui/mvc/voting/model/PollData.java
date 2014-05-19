@@ -102,7 +102,7 @@ public class PollData
         return (int) Math.round(percentage);
     }
 
-    public void addAnswer(String answer)
+    public void addAnswerInPollData(String answer)
     {
         this.answers.add(answer);
     }

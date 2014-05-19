@@ -12,8 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
 public class SelectFrame extends JFrame
@@ -57,21 +55,22 @@ public class SelectFrame extends JFrame
      * @param args
      *            Kommandozeilenargumente.
      */
-    public static void main(final String[] args)
-    {
-        try
-        {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
-        {
-            e.printStackTrace();
-        }
-
-        final AllPolls allPolls = new AllPolls();
-
-        new SelectFrame(allPolls);
-    }
+    // public static void main(final String[] args)
+    // {
+    // try
+    // {
+    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    // }
+    // catch (ClassNotFoundException | InstantiationException |
+    // IllegalAccessException | UnsupportedLookAndFeelException e)
+    // {
+    // e.printStackTrace();
+    // }
+    //
+    // final AllPolls allPolls = new AllPolls();
+    //
+    // new SelectFrame(allPolls);
+    // }
 
     /**
      * Panel, mit dem eine neue Umfrage angelegt werden kann.

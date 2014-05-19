@@ -36,7 +36,7 @@ public class PollModel implements IPoll
     @Override
     public void addAnswer(String answer)
     {
-        this.pollData.addAnswer(answer);
+        this.pollData.addAnswerInPollData(answer);
 
         for (int i = 0; i < listener.size(); ++i)
         {

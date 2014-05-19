@@ -35,6 +35,7 @@ public class AddCandidateTextField extends JTextField implements ActionListener
     @Override
     public void actionPerformed(final ActionEvent e)
     {
+        // this.pollModel.getPollData().addAnswerInPollData(this.getText());
         this.pollModel.addAnswer(this.getText());
         // this.votingModel.addCandidate(this.getText());
         this.setText("");

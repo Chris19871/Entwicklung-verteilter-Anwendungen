@@ -2,6 +2,7 @@ package gui.mvc.voting.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class AllPolls implements IAllPolls
 {
@@ -37,13 +38,25 @@ public class AllPolls implements IAllPolls
     @Override
     public IPoll addPoll(String id, String question, String[] answers)
     {
-        // TODO Auto-generated method stub
+        this.map.remove(id);
+
+        for (int i = 0; i < this.listener.size(); ++i)
+        {
+            this.listener.get(i).pollRemoved(id);
+        }
+
         return null;
     }
 
     @Override
     public void removePoll(String id)
     {
+        this.map.remove(id);
+
+        for (int i = 0; i < this.listener.size(); ++i)
+        {
+            this.listener.get(i).pollRemoved(id);
+        }
     }
 
     @Override
@@ -55,8 +68,17 @@ public class AllPolls implements IAllPolls
     @Override
     public String[][] getAllIdsAndQuestions()
     {
-        // TODO Auto-generated method stub
-        return null;
+        String[][] data = new String[this.polls.size()][2];
+
+        int i = 0;
+        for (Entry<String, IPoll> entry : this.map.entrySet())
+        {
+            data[i][0] = entry.getKey();
+            data[i][1] = entry.getValue().getQuestion();
+            i++;
+        }
+
+        return data;
     }
 
     @Override
