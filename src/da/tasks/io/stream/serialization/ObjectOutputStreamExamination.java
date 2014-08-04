@@ -19,7 +19,7 @@ public class ObjectOutputStreamExamination
     public static void main(String[] args) throws IOException, ClassNotFoundException
     {
         Point point = new Point(10, 20);
-        ObjectOutputStreamExamination.writePoint(point);
+        // ObjectOutputStreamExamination.writePoint(point);
         ObjectOutputStreamExamination.read();
 
         Point restored = ObjectOutputStreamExamination.readPoint();
